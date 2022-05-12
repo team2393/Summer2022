@@ -32,3 +32,14 @@ Open VS Code, then
  * When prompted for the location of the code, use a 'git' subfolder of your home directory
 
 
+Additional Resources
+--------------------
+
+ * Basics of Java:
+   [Free Java Book](https://greenteapress.com/wp/think-java-2e/),
+   [Java Book](https://www.amazon.com/dp/0596009208)
+ * WPILib: https://docs.wpilib.org/en/stable.
+ * Cross-the-Road Electronics, Phoenix tuner and manuals for several CAN devices: https://newsite.ctr-electronics.com/
+ * Other resources: https://www.chiefdelphi.com/, https://www.andymark.com/, https://docs.photonvision.org,
+   https://trickingrockstothink.com/blog_posts/2019/10/19/tuning_pid.html,
+   https://trickingrockstothink.com/blog_posts/2019/10/26/controls_supp_arm.html

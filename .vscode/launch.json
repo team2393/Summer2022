@@ -6,6 +6,20 @@
   "configurations": [
     {
         "type": "java",
+        "name": "Launch AccountDemo",
+        "request": "launch",
+        "mainClass": "tutorial.bank.AccountDemo",
+        "projectName": "Summer2022"
+    },
+    {
+        "type": "java",
+        "name": "Launch Types",
+        "request": "launch",
+        "mainClass": "tutorial.Types",
+        "projectName": "Summer2022"
+    },
+    {
+        "type": "java",
         "name": "Launch CompiledCode",
         "request": "launch",
         "mainClass": "CompiledCode",
