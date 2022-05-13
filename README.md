@@ -25,11 +25,10 @@ Get a copy of our sources
 
 Open VS Code, then
 
- * View menu
- * Command Palette
- * Git: Clone
- * Enter https://github.com/team2393/Summer2022.git
- * When prompted for the location of the code, use a 'git' subfolder of your home directory
+ * In the View menu, select "Command Palette"
+ * Invoke "Git: Clone"
+ * Enter https://github.com/team2393/Summer2022
+ * When prompted for the location of the code, use a "git" subfolder of your home directory
 
 
 Additional Resources
