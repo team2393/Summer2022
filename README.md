@@ -48,9 +48,9 @@ On Windows, there should be a `2022 WPILib VS Code` icon on your desktop.
 You can also use a file explorer, navigate to `C:\Users\Public\wpilib\2022\vscode`
 and then double-click `Code[.exe]`.
 
-On a Mac, there should be a `WPILib VS Code 2022` icon on your desktop.
+On a Mac, there should be a `WPILib VS Code 2022` icon in the dock.
 You can also use the Finder, navigate to your 'Home' folder and then `wpilib/2022/vscode`
-to start `Code[.app]`.
+to start `Visual Studio Code[.app]`.
 
 Get a copy of our sources
 -------------------------
