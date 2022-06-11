@@ -10,14 +10,14 @@ import edu.wpi.first.wpilibj.RobotController;
 
 /** Encoder for rotation based on AndyMark "MA3" absolute analog encoder
  *  
- *  https://www.andymark.com/products/ma3-absolute-encoder-with-cable
+ *  <p>https://www.andymark.com/products/ma3-absolute-encoder-with-cable
  * 
- *  The sensor is meant to be powered by 5 V, in which case it
+ *  <p>The sensor is meant to be powered by 5 V, in which case it
  *  reports 0...5 V for 0..360 degrees. The output is otherwise
  *  "ratiometric to the power supply voltage".
  * 
- *  In theory, the sensor could be mounted such that 0 V = 0 degrees
- *  = "straight ahead", but in practice this is hard to accomplish.
+ *  <p>While the sensor could be mounted such that 0 V = 0 degrees
+ *  = "straight ahead", this is hard to accomplish in practice.
  *  We thus handle the offset from "straight ahead" in software.
  */
 public class RotationEncoder
@@ -28,8 +28,11 @@ public class RotationEncoder
     /** Offset in degrees from "straight ahead" which we define as 0 degrees */
     private double offset;
 
-    /** @param channel Analog input channel (0-3) on RoboRIO into which MA3 is plugged
-     *  @param zero_heading Initial zero offset in degrees
+    /** Construct a RotationEncoder to read angle of "MA3" absolute encoder
+     *  @param channel Analog input channel (0-3) on RoboRIO into which MA3 is plugged
+     *  @param zero_heading Initial zero offset in degrees, the difference between
+     *                      0 degrees and what we actually read from the sensor
+     *                      when pointed "straight ahead"
      */
     public RotationEncoder(final int channel, final double zero_heading)
     {

@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj.PWM;
 /** REV SparkMini motor controller */
 public class SparkMini extends PWMMotorController
 {
-    /** @param channel PMW channel (0-9) on RoboRIO into which SparkMini is plugged */
+    /** Construct motor controller for REV SparkMini
+     *  @param channel PMW channel (0-9) on RoboRIO into which SparkMini is plugged
+     */
     public SparkMini(final int channel)
     {
         super("SparkMini", channel);
