@@ -21,9 +21,6 @@ public class Person
     // (but we can't directly 'set' the age)
     public int getAge()
     {
-        // People with a fake ID might return 21,
-        // older folks might claim to be younger,
-        // but typically we simply return the actual age:
         return age;
     }
 

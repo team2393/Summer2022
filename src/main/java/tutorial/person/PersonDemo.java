@@ -18,6 +18,11 @@ public class PersonDemo
 
         show(guy);
         show(gal);
+
+
+        Person that_guy = new VainPerson("Jim", 46);
+        show(that_guy);
+        System.out.println("We happen to know he's 46, but..");
     }
 
     private static void show(Person person)
