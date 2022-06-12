@@ -3,6 +3,8 @@ Summer 2022 Software Camp
 
 Swerve Drive explorations...
 
+![Diagram](https://imgs.xkcd.com/comics/circuit_diagram.png)
+
 
 Install FRC "wpilib" development tools
 --------------------------------------
