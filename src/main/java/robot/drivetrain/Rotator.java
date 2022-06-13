@@ -1,3 +1,6 @@
+// Copyright (c) FIRST Team 2393 and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 package robot.drivetrain;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -10,7 +13,10 @@ public class Rotator
     private SparkMini motor;
     private RotationEncoder encoder;
 
-
+    /** Construct rotator
+     *  @param channel PMW channel
+     *  @param offset Offset from 'forward' in degrees
+     */
     public Rotator (int channel, double offset)
     {
         this.channel = channel;
@@ -21,15 +27,18 @@ public class Rotator
         SmartDashboard.setDefaultNumber("P", 0.05);
     }
 
+    /** @param speed Speed -1..1 for rotating the swerve module */
     public void run(double speed)
     {
         motor.set(speed);
         SmartDashboard.putNumber("Angle" + channel, encoder.getHeading().getDegrees());
     }
 
+    /** @param desired Desired angle of serve module in degrees */
     public void setAngle(double desired)
     {
         encoder.setZero(SmartDashboard.getNumber("Offset"+channel, 0));
+        // Proportional control, with error normalized to -180..180
         double angle = encoder.getHeading().getDegrees();
         double error = Math.IEEEremainder(desired - angle, 360.0);
         double output = error*SmartDashboard.getNumber("P", 0);
