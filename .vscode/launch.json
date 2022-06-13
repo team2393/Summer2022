@@ -6,6 +6,13 @@
   "configurations": [
     {
         "type": "java",
+        "name": "Launch PersonDemo",
+        "request": "launch",
+        "mainClass": "tutorial.person.PersonDemo",
+        "projectName": "Summer2022"
+    },
+    {
+        "type": "java",
         "name": "Launch AccountDemo",
         "request": "launch",
         "mainClass": "tutorial.bank.AccountDemo",
