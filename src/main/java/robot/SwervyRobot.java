@@ -4,19 +4,23 @@
 
 package robot;
 
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
-import robot.drivetrain.Rotator;
+import robot.drivetrain.SwerveModule;
 
 /** Robot for testing swerve drive */
 public class SwervyRobot extends TimedRobot
 {
-    private Rotator frontRightRotator = new Rotator(1, -90);
-    private Rotator frontLeftRotator = new Rotator (0, -17);
-    private Rotator backLeftRotator = new Rotator (3, -105);
-    private Rotator backRightRotator = new Rotator (2, 20);
+    private SwerveModule frontLeftSwerveModule = new SwerveModule(0, -20);
+    private SwerveModule frontRightSwerveModule = new SwerveModule(1, 87);
+    private SwerveModule backRightSwerveModule = new SwerveModule(2, 195);
+    private SwerveModule backLeftSwerveModule = new SwerveModule(3, -107);
     private XboxController joystick = new XboxController(0);
  
+    
+
+
     @Override
     public void robotInit()
     {
@@ -30,10 +34,11 @@ public class SwervyRobot extends TimedRobot
     @Override
     public void teleopPeriodic() 
     {
-        double angle = joystick.getLeftX()*180;
-        backRightRotator.setAngle(angle);
-        backLeftRotator.setAngle(angle);
-        frontRightRotator.setAngle(angle);
-        frontLeftRotator.setAngle(angle);   
+        double angle = -joystick.getRightX()*180;
+        double speed = -joystick.getLeftY()*1;
+        backRightSwerveModule.setSwerveModule(angle, speed);
+        backLeftSwerveModule.setSwerveModule(angle, speed);
+        frontRightSwerveModule.setSwerveModule(angle, speed);
+        frontLeftSwerveModule.setSwerveModule(angle, speed);   
     }
 }
