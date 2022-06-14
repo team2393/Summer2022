@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 package robot.drivetrain;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.parts.RotationEncoder;
 import robot.parts.SparkMini;
@@ -45,5 +46,9 @@ public class Rotator
         SmartDashboard.putNumber("Angle" + channel, encoder.getHeading().getDegrees());
         SmartDashboard.putNumber("Desired" + channel, desired);
         motor.set(output);
+    }
+
+    public Rotation2d getAngle() {
+        return encoder.getHeading();
     }
 }

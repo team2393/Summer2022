@@ -9,6 +9,11 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 
 public class DriveTrain
  {
+    /**
+     *
+     */
+    private static final double MINIMUM_SPEED_THRESHOLD = .05;
+
     private SwerveModule[] modules = new SwerveModule[]
     {
     new SwerveModule(0, -20),
@@ -44,11 +49,19 @@ public class DriveTrain
 
     public void swerve (double vx, double vy, double vr, Translation2d center)
     {
-        SwerveModuleState[] states = kinematics.toSwerveModuleStates(new ChassisSpeeds(vx, vy, vr), center); 
+        SwerveModuleState[] states = kinematics.toSwerveModuleStates(new ChassisSpeeds(vx, vy, vr), center);
    
         for (int i=0; i<modules.length; ++i)
-             modules[i].setSwerveModule(states[i].angle.getDegrees(),
-                                        states[i].speedMetersPerSecond);
+        {
+            states[i] = SwerveModuleState.optimize(states[i], modules[i].getCurrentAngle());
+
+            if (Math.abs(states[i].speedMetersPerSecond) > MINIMUM_SPEED_THRESHOLD)
+                modules[i].setSwerveModule(states[i].angle.getDegrees(),
+                                           states[i].speedMetersPerSecond);
+            else 
+                modules[i].setSwerveModule(modules[i].getCurrentAngle().getDegrees(),
+                                           0);
+        }
 
     }
 

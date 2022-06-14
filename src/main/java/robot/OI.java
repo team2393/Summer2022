@@ -1,10 +1,15 @@
 package robot;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
 
 public class OI
 {
+    /**
+     *
+     */
+    private static final double DEADBAND = .2;
     private static final XboxController joystick = new XboxController(0);
-    
+
     public static void reset()
     {
         joystick.getAButtonPressed();
@@ -16,22 +21,19 @@ public class OI
 
     public static double getForwardBackward()
     {
-        return -joystick.getLeftY()*1;
+
+        return MathUtil.applyDeadband(-joystick.getLeftY(), DEADBAND);
+        
     }
 
     public static double getLeftRight()
     {
-        return -joystick.getLeftX(); 
+        return MathUtil.applyDeadband(-joystick.getLeftX(), DEADBAND); 
     }
 
     public static double getRotation()
     {
-        return -joystick.getRightX() * Math.PI / 2; 
-    }
-
-    public static double getDegrees()
-    {
-        return -joystick.getRightX()*180;
+        return MathUtil.applyDeadband(-joystick.getRightX(), DEADBAND) * Math.PI / 2; 
     }
 
     public static boolean frontCenter()

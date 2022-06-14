@@ -3,6 +3,8 @@
 // the WPILib BSD license file in the root directory of this project.
 package robot.drivetrain;
 
+import edu.wpi.first.math.geometry.Rotation2d;
+
 public class SwerveModule 
 {
     private Rotator rotator;
@@ -25,6 +27,11 @@ public class SwerveModule
     {
         rotator.setAngle(angle);
         driver.setSpeed(speed);
+    }
+
+    public Rotation2d getCurrentAngle() 
+    {
+        return rotator.getAngle();
     }
 }
 
