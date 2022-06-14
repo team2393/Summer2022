@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Driver 
 {
+    // Measured by driving some distance and computing
+    // raw encoder counts over measured distance
     final static double COUNTS_PER_INCH = 949;
     final static double INCHES_PER_METER = 39.37;
 
