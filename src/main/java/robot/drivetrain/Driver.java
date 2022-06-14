@@ -5,7 +5,6 @@ package robot.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Driver 
@@ -24,7 +23,7 @@ public class Driver
         this.channel = channel;
         driver = new WPI_TalonFX(channel);
         driver.setSelectedSensorPosition(0);
-        SmartDashboard.putNumber("F", .215);
+        SmartDashboard.setDefaultNumber("F", 0.215);
     }
 
     /** @return Get position in meters */
@@ -51,7 +50,7 @@ public class Driver
     /** @param speed Speed in m/s */
     public void setSpeed(double desired_speed)
     {
-        driver.set(desired_speed*SmartDashboard.getNumber("F", 0));
+        driver.set(desired_speed * SmartDashboard.getNumber("F", 0));
         SmartDashboard.putNumber("speed" + channel, getSpeed());
     }
 }

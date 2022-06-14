@@ -4,10 +4,15 @@ import edu.wpi.first.wpilibj.XboxController;
 
 public class OI
 {
-    /**
-     *
-     */
+    /** Joystick deadband */
     private static final double DEADBAND = .2;
+
+    /** Maximum Speed meters/sec */
+    private static final double MAX_SPEED = 2.0;
+
+    /** Maximum rotation in radians/sec */
+    private static final double MAX_ROTATION = Math.PI;
+
     private static final XboxController joystick = new XboxController(0);
 
     public static void reset()
@@ -19,21 +24,20 @@ public class OI
         joystick.getRightBumperPressed();
     }
 
+    /** @return Forward (or backw.) speed in meters/sec */
     public static double getForwardBackward()
     {
-
-        return MathUtil.applyDeadband(-joystick.getLeftY(), DEADBAND);
-        
+        return MAX_SPEED * MathUtil.applyDeadband(-joystick.getLeftY(), DEADBAND);   
     }
 
     public static double getLeftRight()
     {
-        return MathUtil.applyDeadband(-joystick.getLeftX(), DEADBAND); 
+        return MAX_SPEED * MathUtil.applyDeadband(-joystick.getLeftX(), DEADBAND); 
     }
 
     public static double getRotation()
     {
-        return MathUtil.applyDeadband(-joystick.getRightX(), DEADBAND) * Math.PI / 2; 
+        return MAX_ROTATION * MathUtil.applyDeadband(-joystick.getRightX(), DEADBAND); 
     }
 
     public static boolean frontCenter()
