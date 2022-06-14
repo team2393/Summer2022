@@ -17,8 +17,8 @@ public class DriveTrain
     new SwerveModule(3, -107)
     };
 
-    final private static double WIDTH = .64135; 
-    final private static double LENGTH = .61595; 
+    final public static double WIDTH = .64135; 
+    final public static double LENGTH = .61595; 
 
     
      private SwerveDriveKinematics kinematics = new SwerveDriveKinematics(
@@ -42,9 +42,9 @@ public class DriveTrain
             module.setSwerveModule(angle, speed);
     }
 
-    public void swerve (double vx, double vy, double vr)
+    public void swerve (double vx, double vy, double vr, Translation2d center)
     {
-        SwerveModuleState[] states = kinematics.toSwerveModuleStates(new ChassisSpeeds(vx, vy, vr)); 
+        SwerveModuleState[] states = kinematics.toSwerveModuleStates(new ChassisSpeeds(vx, vy, vr), center); 
    
         for (int i=0; i<modules.length; ++i)
              modules[i].setSwerveModule(states[i].angle.getDegrees(),
