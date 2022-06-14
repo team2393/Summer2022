@@ -5,18 +5,14 @@ package robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import robot.drivetrain.DriveTrain;
 import robot.drivetrain.SwerveModule;
 
 /** Robot for testing swerve drive */
 public class SwervyRobot extends TimedRobot
 {
-    private SwerveModule frontLeftSwerveModule = new SwerveModule(0, -20);
-    private SwerveModule frontRightSwerveModule = new SwerveModule(1, 87);
-    private SwerveModule backRightSwerveModule = new SwerveModule(2, 195);
-    private SwerveModule backLeftSwerveModule = new SwerveModule(3, -107);
-
-    private XboxController joystick = new XboxController(0);
-
+    private DriveTrain drive_train =new DriveTrain();
+   
     @Override
     public void robotInit()
     {
@@ -30,11 +26,11 @@ public class SwervyRobot extends TimedRobot
     @Override
     public void teleopPeriodic() 
     {
-        double angle = -joystick.getRightX()*180;
-        double speed = -joystick.getLeftY()*1;
-        backRightSwerveModule.setSwerveModule(angle, speed);
-        backLeftSwerveModule.setSwerveModule(angle, speed);
-        frontRightSwerveModule.setSwerveModule(angle, speed);
-        frontLeftSwerveModule.setSwerveModule(angle, speed);   
+        //double angle = OI.getDegrees();
+        //double speed = OI.getForwardBackward();
+        //drive_train.drive(angle, speed);  
+        
+        drive_train.swerve(OI.getForwardBackward(), OI.getLeftRight(), OI.getRotation());
+        
     }
 }

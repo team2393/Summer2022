@@ -1,0 +1,58 @@
+package robot.drivetrain;
+
+import com.fasterxml.jackson.databind.introspect.WithMember;
+
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
+
+public class DriveTrain
+ {
+    private SwerveModule[] modules = new SwerveModule[]
+    {
+    new SwerveModule(0, -20),
+    new SwerveModule(1, 87),
+    new SwerveModule(2, 195),
+    new SwerveModule(3, -107)
+    };
+
+    final private static double WIDTH = .64135; 
+    final private static double LENGTH = .61595; 
+
+    
+     private SwerveDriveKinematics kinematics = new SwerveDriveKinematics(
+         new Translation2d( LENGTH / 2,  WIDTH / 2),
+         new Translation2d( LENGTH / 2, -WIDTH / 2), 
+         new Translation2d(-LENGTH / 2, -WIDTH / 2), 
+         new Translation2d(-LENGTH / 2,  WIDTH / 2)
+     );
+
+    public void drive(double angle, double speed)
+    {
+        // modules[0].setSwerveModule(angle, speed);
+        // modules[1].setSwerveModule(angle, speed);
+        // modules[2].setSwerveModule(angle, speed);
+        // modules[3].setSwerveModule(angle, speed);
+        
+        // for (int i=0; i<modules.length; ++i)
+        //     modules[i].setSwerveModule(angle, speed);
+
+        for (SwerveModule module : modules)
+            module.setSwerveModule(angle, speed);
+    }
+
+    public void swerve (double vx, double vy, double vr)
+    {
+        SwerveModuleState[] states = kinematics.toSwerveModuleStates(new ChassisSpeeds(vx, vy, vr)); 
+   
+        for (int i=0; i<modules.length; ++i)
+             modules[i].setSwerveModule(states[i].angle.getDegrees(),
+                                        states[i].speedMetersPerSecond);
+
+    }
+
+
+
+
+ }

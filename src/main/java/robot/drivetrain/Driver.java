@@ -5,6 +5,7 @@ package robot.drivetrain;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Driver 
@@ -29,6 +30,7 @@ public class Driver
     /** @return Get position in meters */
     public double getPosition()
     {
+        // return Units.inchesToMeters(driver.getSelectedSensorPosition() / COUNTS_PER_INCH);
         return driver.getSelectedSensorPosition() / COUNTS_PER_INCH / INCHES_PER_METER;
     }
     

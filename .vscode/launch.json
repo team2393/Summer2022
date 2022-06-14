@@ -6,6 +6,13 @@
   "configurations": [
     {
         "type": "java",
+        "name": "Launch Arrays",
+        "request": "launch",
+        "mainClass": "tutorial.Arrays",
+        "projectName": "Summer2022"
+    },
+    {
+        "type": "java",
         "name": "Launch PersonDemo",
         "request": "launch",
         "mainClass": "tutorial.person.PersonDemo",
