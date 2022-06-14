@@ -48,7 +48,8 @@ public class Rotator
         motor.set(output);
     }
 
-    public Rotation2d getAngle() {
+    public Rotation2d getAngle()
+    {
         return encoder.getHeading();
     }
 }

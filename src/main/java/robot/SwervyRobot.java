@@ -3,13 +3,9 @@
 // the WPILib BSD license file in the root directory of this project.
 package robot;
 
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.SelectCenter;
-import robot.drivetrain.SwerveModule;
 
 /** Robot for testing swerve drive */
 public class SwervyRobot extends TimedRobot
@@ -27,7 +23,8 @@ public class SwervyRobot extends TimedRobot
         System.out.println("********************************");
     }
     @Override
-    public void teleopInit() {
+    public void teleopInit()
+    {
         OI.reset();
     }
  
@@ -38,11 +35,9 @@ public class SwervyRobot extends TimedRobot
         //double speed = OI.getForwardBackward();
         //drive_train.drive(angle, speed);  
 
-
         drive_train.swerve(OI.getForwardBackward(),
                            OI.getLeftRight(),
                            OI.getRotation(),
-                           center.determineCenter());
-        
+                           center.determineCenter());        
     }
 }
