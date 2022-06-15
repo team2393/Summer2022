@@ -17,6 +17,11 @@ public class Person
         age = current_age;
     }
 
+    public static boolean hasEyes()
+    {
+        return true;
+    }
+
     // 'getter' for reading the age
     // (but we can't directly 'set' the age)
     public int getAge()

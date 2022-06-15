@@ -8,6 +8,16 @@ public class PersonDemo
         Person guy = new Person("Freddy", 21);
         Person gal = new Person("Jenny", 17);
 
+        if (guy.hasEyes())
+            System.out.println(guy.name + " can see!");
+
+        if (gal.hasEyes())
+            System.out.println(gal.name + " can see!");
+        
+        if (Person.hasEyes())
+            System.out.println("Every person has eyes!");
+
+
         // System.out.println(guy.name + " is " + guy.getAge() + " years old");
         show(guy);
         show(gal);
