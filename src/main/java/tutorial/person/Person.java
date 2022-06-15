@@ -30,9 +30,9 @@ public class Person
     }
 
     // Celebrating a birthday makes you one year older
-    public void celebratedDoubleBirthday()
+    public void celebratedBirthday()
     {
-        age = age + 2;
+        age = age + 1;
     }
 
     // There's no way to get younger
