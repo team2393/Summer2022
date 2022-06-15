@@ -17,6 +17,7 @@ public class Person
         age = current_age;
     }
 
+    //static because every person has eyes
     public static boolean hasEyes()
     {
         return true;
