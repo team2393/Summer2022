@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveTrain
  {
-    /** Don't rotate sverve module unless speed is at least this
+    /** Don't rotate swerve module unless speed is at least this
      *  to avoid spinning in place
     */
     private static final double MINIMUM_SPEED_THRESHOLD = .05;
@@ -32,10 +32,10 @@ public class DriveTrain
     
     /** Kinematics that translate chassis speed to module settings and vice versa */
     private SwerveDriveKinematics kinematics = new SwerveDriveKinematics(
-         new Translation2d( LENGTH / 2,  WIDTH / 2),
-         new Translation2d( LENGTH / 2, -WIDTH / 2), 
-         new Translation2d(-LENGTH / 2, -WIDTH / 2), 
-         new Translation2d(-LENGTH / 2,  WIDTH / 2) );
+        new Translation2d( LENGTH / 2,  WIDTH / 2),
+        new Translation2d( LENGTH / 2, -WIDTH / 2), 
+        new Translation2d(-LENGTH / 2, -WIDTH / 2), 
+        new Translation2d(-LENGTH / 2,  WIDTH / 2) );
 
     /** Gyro that provides heading of robot */
     private PigeonIMU gyro = new PigeonIMU(0);
