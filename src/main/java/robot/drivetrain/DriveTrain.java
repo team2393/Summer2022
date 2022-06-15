@@ -7,27 +7,28 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import pabeles.concurrency.ConcurrencyOps.Reset;
 
 public class DriveTrain
  {
     /** Don't rotate swerve module unless speed is at least this
      *  to avoid spinning in place
-    */
+     */
     private static final double MINIMUM_SPEED_THRESHOLD = .05;
 
     /** Modules located in four corners of apx. square robot */
     private SwerveModule[] modules = new SwerveModule[]
     {
-        new SwerveModule(0, -20), // Front left
-        new SwerveModule(1, 87),  // Front right
-        new SwerveModule(2, 195), // Back right
-        new SwerveModule(3, -107) // Back left
+        new SwerveModule(0,  -20),  // Front left
+        new SwerveModule(1,   87),  // Front right
+        new SwerveModule(2,  195),  // Back right
+        new SwerveModule(3, -107)   // Back left
     };
 
     /** Size of chassis which is not exactly a square,
      *  distance between swerve modules
      */
-    final public static double WIDTH = .64135; 
+    final public static double WIDTH  = .64135; 
     final public static double LENGTH = .61595; 
     
     /** Kinematics that translate chassis speed to module settings and vice versa */
@@ -39,6 +40,17 @@ public class DriveTrain
 
     /** Gyro that provides heading of robot */
     private PigeonIMU gyro = new PigeonIMU(0);
+    private double gyro_offset = 0;
+
+    public void reset() 
+    {
+        gyro_offset = gyro.getFusedHeading();
+    } 
+
+    public double getheading()
+    {
+        return gyro.getFusedHeading() - gyro_offset;
+    } 
 
     /** Drive all modules with same angle and speed */
     public void drive(double angle, double speed)
@@ -80,7 +92,7 @@ public class DriveTrain
                                            0);
         }
 
-        SmartDashboard.putNumber("gyro", gyro.getFusedHeading());
+        SmartDashboard.putNumber("gyro", getheading());
     }
 
  }
