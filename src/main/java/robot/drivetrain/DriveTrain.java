@@ -35,6 +35,7 @@ public class DriveTrain
 
     private PigeonIMU gyro = new PigeonIMU(0);
 
+    /** Drive all modules with same angle and speed */
     public void drive(double angle, double speed)
     {
         // modules[0].setSwerveModule(angle, speed);
@@ -49,6 +50,12 @@ public class DriveTrain
             module.setSwerveModule(angle, speed);
     }
 
+    /** Swerve
+     *  @param vx Speed in 'X' (forward/back) direction
+     *  @param vy Speed in 'Y' (left/right) direction
+     *  @param vr Speed for rotation
+     *  @param center Center of rotation
+     */
     public void swerve (double vx, double vy, double vr, Translation2d center)
     {
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(new ChassisSpeeds(vx, vy, vr), center);
@@ -68,6 +75,5 @@ public class DriveTrain
 
         SmartDashboard.putNumber("gyro", gyro.getFusedHeading());
     }
-
 
  }
