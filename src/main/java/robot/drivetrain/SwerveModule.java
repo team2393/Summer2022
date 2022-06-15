@@ -36,8 +36,8 @@ public class SwerveModule
     }
 
     public SwerveModuleState getState()
-        {
-          return new SwerveModuleState(driver.getSpeed(), rotator.getAngle()); 
-        }
+    {
+        return new SwerveModuleState(driver.getSpeed(), rotator.getAngle()); 
+    }
 }
 

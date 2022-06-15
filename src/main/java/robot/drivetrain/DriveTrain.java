@@ -54,8 +54,8 @@ public class DriveTrain extends SubsystemBase
 
     /** Gyro that provides heading of robot */
     private PigeonIMU gyro = new PigeonIMU(0);
+    /** Gyro's"zero" offset (since resetting the gyro via CAN is sometimes delayed) */
     private double gyro_offset = 0;
-
 
     private SwerveDriveOdometry odometry = new SwerveDriveOdometry(kinematics, Rotation2d.fromDegrees(0));
     
@@ -64,7 +64,6 @@ public class DriveTrain extends SubsystemBase
         SmartDashboard.setDefaultNumber("XYPvalue", 1);
         SmartDashboard.setDefaultNumber("RotationPValue", 5);
     }
-
 
     public void reset() 
     {
@@ -115,7 +114,6 @@ public class DriveTrain extends SubsystemBase
             modules[i].setSwerveModule(states[i].angle.getDegrees(),
                                        states[i].speedMetersPerSecond);
         }
-
     }
 
     @Override
@@ -128,7 +126,6 @@ public class DriveTrain extends SubsystemBase
         }
         odometry.update(Rotation2d.fromDegrees(getheading()), states);
 
-
         SmartDashboard.putNumber("gyro", getheading());
         SmartDashboard.putNumber("x", odometry.getPoseMeters().getX());
         SmartDashboard.putNumber("y", odometry.getPoseMeters().getY());
@@ -140,12 +137,11 @@ public class DriveTrain extends SubsystemBase
         PIDController xController = new PIDController(SmartDashboard.getNumber("XYPvalue", 0), 0, 0);
         PIDController yController = new PIDController(SmartDashboard.getNumber("XYPvalue", 0), 0, 0);
         
-        final ProfiledPIDController thetaController = new ProfiledPIDController(SmartDashboard.getNumber("RotationPValue", 0), 0, 0,
+        ProfiledPIDController thetaController = new ProfiledPIDController(
+                SmartDashboard.getNumber("RotationPValue", 0), 0, 0,
                 new TrapezoidProfile.Constraints(Math.toRadians(30),
                                                  Math.toRadians(30)));
         thetaController.enableContinuousInput(-Math.PI, Math.PI);
-
-        
         
         Supplier<Pose2d> pose = () -> odometry.getPoseMeters();
         Consumer<SwerveModuleState[]> outputModuleStates = states ->
@@ -156,7 +152,9 @@ public class DriveTrain extends SubsystemBase
                                            states[i].speedMetersPerSecond);
             }
         };
-        Supplier<Rotation2d> desiredRotation =() -> Rotation2d.fromDegrees(endAngle);
-        return new SwerveControllerCommand(trajectory, pose, kinematics, xController, yController, thetaController, desiredRotation, outputModuleStates, this);
+        Supplier<Rotation2d> desiredRotation = () -> Rotation2d.fromDegrees(endAngle);
+        return new SwerveControllerCommand(trajectory, pose, kinematics,
+                                           xController, yController, thetaController,
+                                           desiredRotation, outputModuleStates, this);
     }
  }

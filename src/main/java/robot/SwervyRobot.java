@@ -14,9 +14,7 @@ import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.SelectCenter;
 import robot.drivetrain.StayPut;
@@ -67,6 +65,7 @@ public class SwervyRobot extends TimedRobot
     public void autonomousInit() 
     {
         drive_train.reset();
+
         TrajectoryConfig config = new TrajectoryConfig(1.0, 1.0);
 
         List<Pose2d> waypoints = new ArrayList<>();
