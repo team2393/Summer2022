@@ -4,6 +4,7 @@
 package robot.drivetrain;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 
 public class SwerveModule 
 {
@@ -33,5 +34,10 @@ public class SwerveModule
     {
         return rotator.getAngle();
     }
+
+    public SwerveModuleState getState()
+        {
+          return new SwerveModuleState(driver.getSpeed(), rotator.getAngle()); 
+        }
 }
 

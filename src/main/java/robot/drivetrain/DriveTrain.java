@@ -2,9 +2,11 @@ package robot.drivetrain;
 
 import com.ctre.phoenix.sensors.PigeonIMU;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import pabeles.concurrency.ConcurrencyOps.Reset;
@@ -41,6 +43,11 @@ public class DriveTrain
     /** Gyro that provides heading of robot */
     private PigeonIMU gyro = new PigeonIMU(0);
     private double gyro_offset = 0;
+
+
+    private SwerveDriveOdometry odometry = new SwerveDriveOdometry(kinematics, Rotation2d.fromDegrees(0));
+
+
 
     public void reset() 
     {
@@ -84,15 +91,27 @@ public class DriveTrain
             states[i] = SwerveModuleState.optimize(states[i], modules[i].getCurrentAngle());
 
             // Actually moving? Then rotate as requested
-            if (Math.abs(states[i].speedMetersPerSecond) > MINIMUM_SPEED_THRESHOLD)
-                modules[i].setSwerveModule(states[i].angle.getDegrees(),
-                                           states[i].speedMetersPerSecond);
-            else // Not moving? Keep module pointed where it was
-                modules[i].setSwerveModule(modules[i].getCurrentAngle().getDegrees(),
-                                           0);
+            if (Math.abs(states[i].speedMetersPerSecond) < MINIMUM_SPEED_THRESHOLD)
+                states[i] = new SwerveModuleState(0, modules[i].getCurrentAngle());
+
+            modules[i].setSwerveModule(states[i].angle.getDegrees(),
+                                       states[i].speedMetersPerSecond);
         }
+        for (int i=0; i<modules.length; ++i)
+        {
+            states[i] = modules[i].getState();
+        }
+        
+        odometry.update(Rotation2d.fromDegrees(getheading()), states);
+
 
         SmartDashboard.putNumber("gyro", getheading());
+        SmartDashboard.putNumber("x", odometry.getPoseMeters().getX());
+        SmartDashboard.putNumber("y", odometry.getPoseMeters().getY());
+        SmartDashboard.putNumber("angle", odometry.getPoseMeters().getRotation().getDegrees());
+        
+        
+
     }
 
  }
