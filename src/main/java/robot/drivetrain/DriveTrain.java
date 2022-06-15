@@ -1,7 +1,12 @@
 package robot.drivetrain;
 
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
 import com.ctre.phoenix.sensors.PigeonIMU;
 
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -10,7 +15,10 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import pabeles.concurrency.ConcurrencyOps.Reset;
@@ -50,7 +58,12 @@ public class DriveTrain extends SubsystemBase
 
 
     private SwerveDriveOdometry odometry = new SwerveDriveOdometry(kinematics, Rotation2d.fromDegrees(0));
-
+    
+    public DriveTrain()
+    {
+        SmartDashboard.setDefaultNumber("XYPvalue", 1);
+        SmartDashboard.setDefaultNumber("RotationPValue", 5);
+    }
 
 
     public void reset() 
@@ -120,5 +133,30 @@ public class DriveTrain extends SubsystemBase
         SmartDashboard.putNumber("x", odometry.getPoseMeters().getX());
         SmartDashboard.putNumber("y", odometry.getPoseMeters().getY());
         SmartDashboard.putNumber("angle", odometry.getPoseMeters().getRotation().getDegrees());
+    }
+
+    public CommandBase createTrajectoryCommand(Trajectory trajectory, double endAngle)
+    {
+        PIDController xController = new PIDController(SmartDashboard.getNumber("XYPvalue", 0), 0, 0);
+        PIDController yController = new PIDController(SmartDashboard.getNumber("XYPvalue", 0), 0, 0);
+        
+        final ProfiledPIDController thetaController = new ProfiledPIDController(SmartDashboard.getNumber("RotationPValue", 0), 0, 0,
+                new TrapezoidProfile.Constraints(Math.toRadians(30),
+                                                 Math.toRadians(30)));
+        thetaController.enableContinuousInput(-Math.PI, Math.PI);
+
+        
+        
+        Supplier<Pose2d> pose = () -> odometry.getPoseMeters();
+        Consumer<SwerveModuleState[]> outputModuleStates = states ->
+        {
+            for (int i=0; i<modules.length; ++i)
+            {
+                modules[i].setSwerveModule(states[i].angle.getDegrees(),
+                                           states[i].speedMetersPerSecond);
+            }
+        };
+        Supplier<Rotation2d> desiredRotation =() -> Rotation2d.fromDegrees(endAngle);
+        return new SwerveControllerCommand(trajectory, pose, kinematics, xController, yController, thetaController, desiredRotation, outputModuleStates, this);
     }
  }

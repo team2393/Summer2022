@@ -21,14 +21,69 @@
               "_source0": "network_table:///SmartDashboard/gyro",
               "_title": "SmartDashboard/gyro"
             }
+          },
+          "8,1": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/angle",
+              "_title": "SmartDashboard/angle"
+            }
+          },
+          "8,2": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/x",
+              "_title": "SmartDashboard/x"
+            }
+          },
+          "8,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/y",
+              "_title": "SmartDashboard/y"
+            }
+          },
+          "11,1": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/RotationPValue",
+              "_title": "SmartDashboard/RotationPValue"
+            }
+          },
+          "11,2": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/XYPvalue",
+              "_title": "SmartDashboard/XYPvalue"
+            }
           }
         }
       }
     }
   ],
   "windowGeometry": {
-    "x": -8.0,
-    "y": 246.0,
+    "x": -5.599999904632568,
+    "y": 241.1999969482422,
     "width": 1545.5999755859375,
     "height": 530.7999877929688
   }
