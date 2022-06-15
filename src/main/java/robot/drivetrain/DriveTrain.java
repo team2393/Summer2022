@@ -15,24 +15,29 @@ public class DriveTrain
     */
     private static final double MINIMUM_SPEED_THRESHOLD = .05;
 
+    /** Modules located in four corners of apx. square robot */
     private SwerveModule[] modules = new SwerveModule[]
     {
-        new SwerveModule(0, -20),
-        new SwerveModule(1, 87),
-        new SwerveModule(2, 195),
-        new SwerveModule(3, -107)
+        new SwerveModule(0, -20), // Front left
+        new SwerveModule(1, 87),  // Front right
+        new SwerveModule(2, 195), // Back right
+        new SwerveModule(3, -107) // Back left
     };
 
-    /** Size of chassis, distance between swerve modules */
+    /** Size of chassis which is not exactly a square,
+     *  distance between swerve modules
+     */
     final public static double WIDTH = .64135; 
     final public static double LENGTH = .61595; 
     
+    /** Kinematics that translate chassis speed to module settings and vice versa */
     private SwerveDriveKinematics kinematics = new SwerveDriveKinematics(
          new Translation2d( LENGTH / 2,  WIDTH / 2),
          new Translation2d( LENGTH / 2, -WIDTH / 2), 
          new Translation2d(-LENGTH / 2, -WIDTH / 2), 
          new Translation2d(-LENGTH / 2,  WIDTH / 2) );
 
+    /** Gyro that provides heading of robot */
     private PigeonIMU gyro = new PigeonIMU(0);
 
     /** Drive all modules with same angle and speed */
@@ -56,12 +61,14 @@ public class DriveTrain
      *  @param vr Speed for rotation
      *  @param center Center of rotation
      */
-    public void swerve (double vx, double vy, double vr, Translation2d center)
+    public void swerve(double vx, double vy, double vr, Translation2d center)
     {
+        // Translate desired chassis movement to settings of the 4 swerve modules
         SwerveModuleState[] states = kinematics.toSwerveModuleStates(new ChassisSpeeds(vx, vy, vr), center);
    
         for (int i=0; i<modules.length; ++i)
         {
+            // Optimize module rotation
             states[i] = SwerveModuleState.optimize(states[i], modules[i].getCurrentAngle());
 
             // Actually moving? Then rotate as requested
