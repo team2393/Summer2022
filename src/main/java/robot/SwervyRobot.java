@@ -4,6 +4,7 @@
 package robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.SelectCenter;
 
@@ -23,6 +24,11 @@ public class SwervyRobot extends TimedRobot
         System.out.println("********************************");
     }
 
+    @Override
+    public void robotPeriodic() 
+    {
+       CommandScheduler.getInstance().run(); 
+    }
     @Override
     public void teleopInit()
     {

@@ -2,6 +2,8 @@ package robot.drivetrain;
 
 import com.ctre.phoenix.sensors.PigeonIMU;
 
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -9,9 +11,11 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import pabeles.concurrency.ConcurrencyOps.Reset;
 
-public class DriveTrain
+public class DriveTrain extends SubsystemBase
  {
     /** Don't rotate swerve module unless speed is at least this
      *  to avoid spinning in place
@@ -52,6 +56,7 @@ public class DriveTrain
     public void reset() 
     {
         gyro_offset = gyro.getFusedHeading();
+        odometry.resetPosition(new Pose2d(0, 0, Rotation2d.fromDegrees(0)), Rotation2d.fromDegrees(getheading()));
     } 
 
     public double getheading()
@@ -97,11 +102,17 @@ public class DriveTrain
             modules[i].setSwerveModule(states[i].angle.getDegrees(),
                                        states[i].speedMetersPerSecond);
         }
+
+    }
+
+    @Override
+    public void periodic() 
+    {
+        SwerveModuleState states[] = new SwerveModuleState[modules.length];
         for (int i=0; i<modules.length; ++i)
         {
             states[i] = modules[i].getState();
         }
-        
         odometry.update(Rotation2d.fromDegrees(getheading()), states);
 
 
@@ -109,9 +120,5 @@ public class DriveTrain
         SmartDashboard.putNumber("x", odometry.getPoseMeters().getX());
         SmartDashboard.putNumber("y", odometry.getPoseMeters().getY());
         SmartDashboard.putNumber("angle", odometry.getPoseMeters().getRotation().getDegrees());
-        
-        
-
     }
-
  }

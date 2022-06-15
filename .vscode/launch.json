@@ -6,6 +6,13 @@
   "configurations": [
     {
         "type": "java",
+        "name": "Launch TrajectoryViewer",
+        "request": "launch",
+        "mainClass": "robot.auto.TrajectoryViewer",
+        "projectName": "Summer2022"
+    },
+    {
+        "type": "java",
         "name": "Launch Arrays",
         "request": "launch",
         "mainClass": "tutorial.Arrays",
