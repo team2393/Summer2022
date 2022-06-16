@@ -86,7 +86,7 @@ public class SwervyRobot extends TimedRobot
 
         new SequentialCommandGroup(leg1,
                                    leg2,
-                                   new StayPut(drive_train)).schedule();
+                                   new StayPut(drive_train, 90.0)).schedule();
 
     }
 }
