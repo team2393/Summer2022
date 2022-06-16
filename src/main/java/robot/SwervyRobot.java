@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import robot.drivetrain.AbsoluteDrive;
 import robot.drivetrain.DirectionalDrive;
 import robot.drivetrain.DriveTrain;
 import robot.drivetrain.StayPut;
@@ -45,8 +46,8 @@ public class SwervyRobot extends TimedRobot
     {
         OI.reset();
         drive_train.reset();
-
-        new DirectionalDrive(drive_train).schedule();
+        new AbsoluteDrive(drive_train).schedule();
+        //new DirectionalDrive(drive_train).schedule();
     }
 
     @Override
