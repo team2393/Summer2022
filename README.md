@@ -1,9 +1,16 @@
 Summer 2022 Software Camp
 =========================
 
-Swerve Drive explorations...
 
-![Diagram](https://imgs.xkcd.com/comics/circuit_diagram.png)
+![Robot](swervebot.png)
+
+Swerve Drive explorations:
+
+ * Drive manually in 'teleop' or fully computer-controlled in 'autonomous'
+ * Drive in robot's coordinate system, 'swerving' in any direction
+   and rotating around the center of the robot or other points
+ * Drive in 'field' coordinate system where 'forward' always moves into the
+   same direction, regardless of rotation of the robot
 
 
 Install FRC "wpilib" development tools

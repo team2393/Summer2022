@@ -1,3 +1,6 @@
+// Copyright (c) FIRST Team 2393 and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 package robot.drivetrain;
 
 import java.util.function.Consumer;
@@ -66,10 +69,11 @@ public class DriveTrain extends SubsystemBase
     public void reset() 
     {
         gyro_offset = gyro.getFusedHeading();
-        odometry.resetPosition(new Pose2d(0, 0, Rotation2d.fromDegrees(0)), Rotation2d.fromDegrees(getheading()));
+        odometry.resetPosition(new Pose2d(0, 0, Rotation2d.fromDegrees(0)), Rotation2d.fromDegrees(getHeading()));
     } 
 
-    public double getheading()
+    /** @return Gyro angle relative to last 'reset' */
+    public double getHeading()
     {
         return gyro.getFusedHeading() - gyro_offset;
     } 
@@ -125,37 +129,45 @@ public class DriveTrain extends SubsystemBase
         {
             states[i] = modules[i].getState();
         }
-        odometry.update(Rotation2d.fromDegrees(getheading()), states);
+        odometry.update(Rotation2d.fromDegrees(getHeading()), states);
 
-        SmartDashboard.putNumber("gyro", getheading());
+        SmartDashboard.putNumber("gyro", getHeading());
         SmartDashboard.putNumber("x", odometry.getPoseMeters().getX());
         SmartDashboard.putNumber("y", odometry.getPoseMeters().getY());
         SmartDashboard.putNumber("angle", odometry.getPoseMeters().getRotation().getDegrees());
     }
 
+    /** @param trajectory Trajectory to follow
+     *  @param endAngle Desired heading of robot at end
+     *  @return Command that follows that trajectory
+     */
     public CommandBase createTrajectoryCommand(Trajectory trajectory, double endAngle)
     {
+        // SwerveControllerCommand will basically send the speed at each point of the
+        // trajectory to the serve modules, using many little helpers:
+        // Controllers that correct for the x, y and angle to match the trajectory
         PIDController xController = new PIDController(SmartDashboard.getNumber("XYPvalue", 0), 0, 0);
         PIDController yController = new PIDController(SmartDashboard.getNumber("XYPvalue", 0), 0, 0);
-        
+        // Angle controller is 'profiled' and 'continuous' 
         ProfiledPIDController thetaController = new ProfiledPIDController(
                 SmartDashboard.getNumber("RotationPValue", 0), 0, 0,
                 new TrapezoidProfile.Constraints(Math.toRadians(30),
                                                  Math.toRadians(30)));
         thetaController.enableContinuousInput(-Math.PI, Math.PI);
         
-        Supplier<Pose2d> pose = () -> odometry.getPoseMeters();
-        Consumer<SwerveModuleState[]> outputModuleStates = states ->
+        // Called by SwerveControllerCommand to check where we are
+        Supplier<Pose2d> pose_getter = () -> odometry.getPoseMeters();
+        // Called by SwerveControllerCommand to tell us what modules should do
+        Consumer<SwerveModuleState[]> module_setter = states ->
         {
             for (int i=0; i<modules.length; ++i)
-            {
                 modules[i].setSwerveModule(states[i].angle.getDegrees(),
                                            states[i].speedMetersPerSecond);
-            }
         };
+        // Called by SwerveControllerCommand to check at what angle we want to be
         Supplier<Rotation2d> desiredRotation = () -> Rotation2d.fromDegrees(endAngle);
-        return new SwerveControllerCommand(trajectory, pose, kinematics,
+        return new SwerveControllerCommand(trajectory, pose_getter, kinematics,
                                            xController, yController, thetaController,
-                                           desiredRotation, outputModuleStates, this);
+                                           desiredRotation, module_setter, this);
     }
  }

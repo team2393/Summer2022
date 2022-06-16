@@ -1,7 +1,7 @@
 {
   "tabPane": [
     {
-      "title": "Tab 2",
+      "title": "Swerve",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
       "widgetPane": {
@@ -11,50 +11,6 @@
         "vgap": 16.0,
         "titleType": 0,
         "tiles": {
-          "6,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/gyro",
-              "_title": "SmartDashboard/gyro"
-            }
-          },
-          "8,1": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/angle",
-              "_title": "SmartDashboard/angle"
-            }
-          },
-          "8,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/x",
-              "_title": "SmartDashboard/x"
-            }
-          },
-          "8,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/y",
-              "_title": "SmartDashboard/y"
-            }
-          },
           "11,1": {
             "size": [
               3,
@@ -76,15 +32,109 @@
               "_source0": "network_table:///SmartDashboard/XYPvalue",
               "_title": "SmartDashboard/XYPvalue"
             }
+          },
+          "11,3": {
+            "size": [
+              3,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/F",
+              "_title": "/SmartDashboard/F"
+            }
+          },
+          "11,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/desired speed1",
+              "_title": "/SmartDashboard/desired speed1"
+            }
+          },
+          "13,0": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/speed1",
+              "_title": "/SmartDashboard/speed1"
+            }
+          },
+          "0,0": {
+            "size": [
+              3,
+              3
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Drive Modes",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Direction Drvie",
+                  "_title": "/SmartDashboard/Direction Drvie"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Absolute Drive",
+                  "_title": "/SmartDashboard/Absolute Drive"
+                }
+              ]
+            }
+          },
+          "3,0": {
+            "size": [
+              3,
+              5
+            ],
+            "content": {
+              "_type": "List Layout",
+              "_title": "Position",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/angle",
+                  "_title": "Angle"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/gyro",
+                  "_title": "Gyro"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/x",
+                  "_title": "X"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/y",
+                  "_title": "Y"
+                },
+                {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Reset",
+                  "_title": "/SmartDashboard/Reset"
+                }
+              ]
+            }
           }
         }
       }
     }
   ],
   "windowGeometry": {
-    "x": -5.599999904632568,
-    "y": 241.1999969482422,
-    "width": 1545.5999755859375,
-    "height": 530.7999877929688
+    "x": -5.199999809265137,
+    "y": 231.1999969482422,
+    "width": 1547.5999755859375,
+    "height": 595.2000122070312
   }
 }

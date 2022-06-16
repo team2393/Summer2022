@@ -1,8 +1,15 @@
+// Copyright (c) FIRST Team 2393 and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 package robot.drivetrain;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import robot.OI;
 
+/** Command for human to drive robot in direction in which it's currently pointed
+ * 
+ *  'Forward' means go whereever the nose of the robot points
+ */
 public class DirectionalDrive extends CommandBase
 {
     private DriveTrain drive_train;

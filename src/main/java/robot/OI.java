@@ -74,5 +74,10 @@ public class OI
     {
         return joystick.getLeftBumperPressed();
     }
+
+    public static boolean doReset()
+    {
+        return joystick.getLeftTriggerAxis() > 0.5;
+    }
 }
 
