@@ -24,6 +24,8 @@ import robot.drivetrain.StayPut;
 public class SwervyRobot extends TimedRobot
 {
     private DriveTrain drive_train =new DriveTrain();
+    private CommandBase absolute_drive = new AbsoluteDrive(drive_train);
+    private CommandBase directional_drive = new DirectionalDrive(drive_train);
    
     @Override
     public void robotInit()
@@ -46,16 +48,18 @@ public class SwervyRobot extends TimedRobot
     {
         OI.reset();
         drive_train.reset();
-        new AbsoluteDrive(drive_train).schedule();
-        //new DirectionalDrive(drive_train).schedule();
+        directional_drive.schedule();
+        
     }
 
     @Override
     public void teleopPeriodic() 
     {
-        //double angle = OI.getDegrees();
-        //double speed = OI.getForwardBackward();
-        //drive_train.drive(angle, speed);  
+        if (OI.toggleDriveMode())
+            if (directional_drive.isScheduled())
+                absolute_drive.schedule();
+            else  
+                directional_drive.schedule();
     }
 
     @Override

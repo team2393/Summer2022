@@ -12,6 +12,7 @@ public class AbsoluteDrive extends CommandBase
     public AbsoluteDrive(DriveTrain drive_train)
     {
         this.drive_train = drive_train;
+        addRequirements(drive_train);
     }
 
     @Override

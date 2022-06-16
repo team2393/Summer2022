@@ -24,6 +24,7 @@ public class OI
         joystick.getXButtonPressed();
         joystick.getYButtonPressed();
         joystick.getRightBumperPressed();
+        joystick.getLeftBumperPressed();
     }
 
     /** @return Forward (or backw.) speed in meters/sec */
@@ -67,6 +68,11 @@ public class OI
     public static boolean backCenter()
     {
         return joystick.getAButtonPressed();
+    }
+
+    public static boolean toggleDriveMode()
+    {
+        return joystick.getLeftBumperPressed();
     }
 }
 

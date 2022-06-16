@@ -11,6 +11,7 @@ public class DirectionalDrive extends CommandBase
     public DirectionalDrive(DriveTrain drive_train)
     {
         this.drive_train = drive_train;
+        addRequirements(drive_train);
     }
 
     @Override
