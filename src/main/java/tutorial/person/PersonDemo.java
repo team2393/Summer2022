@@ -23,8 +23,8 @@ public class PersonDemo
         show(gal);
 
         System.out.println("Happy Birthday to " + gal.name + " and " + gal.name + "!");
-        gal.celebrateBirthday();
-        guy.celebrateBirthday();
+        gal.celebratedBirthday();
+        guy.celebratedBirthday();
 
         show(guy);
         show(gal);
