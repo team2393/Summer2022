@@ -15,15 +15,14 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import robot.drivetrain.DirectionalDrive;
 import robot.drivetrain.DriveTrain;
-import robot.drivetrain.SelectCenter;
 import robot.drivetrain.StayPut;
 
 /** Robot for testing swerve drive */
 public class SwervyRobot extends TimedRobot
 {
     private DriveTrain drive_train =new DriveTrain();
-    private SelectCenter center = new SelectCenter();
    
     @Override
     public void robotInit()
@@ -40,25 +39,22 @@ public class SwervyRobot extends TimedRobot
     {
        CommandScheduler.getInstance().run(); 
     }
+
     @Override
     public void teleopInit()
     {
         OI.reset();
         drive_train.reset();
+
+        new DirectionalDrive(drive_train).schedule();
     }
 
- 
     @Override
     public void teleopPeriodic() 
     {
         //double angle = OI.getDegrees();
         //double speed = OI.getForwardBackward();
         //drive_train.drive(angle, speed);  
-
-        drive_train.swerve(OI.getForwardBackward(),
-                           OI.getLeftRight(),
-                           OI.getRotation(),
-                           center.determineCenter());        
     }
 
     @Override
