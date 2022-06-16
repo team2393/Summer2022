@@ -23,7 +23,7 @@ public class Driver
         this.channel = channel;
         driver = new WPI_TalonFX(channel);
         driver.setSelectedSensorPosition(0);
-        SmartDashboard.setDefaultNumber("F", 0.215);
+        SmartDashboard.setDefaultNumber("F", 2.8);
     }
 
     /** @return Get position in meters */
@@ -50,7 +50,8 @@ public class Driver
     /** @param speed Speed in m/s */
     public void setSpeed(double desired_speed)
     {
-        driver.set(desired_speed * SmartDashboard.getNumber("F", 0));
+        driver.setVoltage(desired_speed * SmartDashboard.getNumber("F", 0));
         SmartDashboard.putNumber("speed" + channel, getSpeed());
+        SmartDashboard.putNumber("desired speed" + channel, desired_speed);
     }
 }

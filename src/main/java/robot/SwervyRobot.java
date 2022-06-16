@@ -81,7 +81,7 @@ public class SwervyRobot extends TimedRobot
         waypoints.add(new Pose2d(2.6, -4.56, Rotation2d.fromDegrees(90)));
         waypoints.add(new Pose2d(2.76, -2.27, Rotation2d.fromDegrees(90)));
         waypoints.add(new Pose2d(2.4, 0.1, Rotation2d.fromDegrees(180)));
-        waypoints.add(new Pose2d(-0.15, -0.1, Rotation2d.fromDegrees(180)));
+        waypoints.add(new Pose2d(0.0, -0.1, Rotation2d.fromDegrees(180)));
         trajectory = TrajectoryGenerator.generateTrajectory(waypoints, config);
         CommandBase leg2 = drive_train.createTrajectoryCommand(trajectory, 0);
 
