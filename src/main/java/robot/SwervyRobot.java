@@ -18,4 +18,7 @@ public class SwervyRobot extends TimedRobot
         System.out.println("********************************");
         System.out.println("********************************");
     }
+
+    // Next, you would add components to the robot
+    // and do something in the auto and teleop phases
 }
