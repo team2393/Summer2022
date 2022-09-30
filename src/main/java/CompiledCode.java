@@ -39,3 +39,26 @@ public class CompiledCode
         System.out.println("and the area is " + area);
     }    
 }
+
+
+
+
+/* For what it's worth, in "C" the program would look like this:
+
+#include <stdio.h>
+
+int main(int argc, const char *argv[])
+{
+    // Circle with radius ...
+    double r = 27.5;
+    double pi = 3.1415;
+    
+    double circ = 2*pi*r;
+    double area = pi*r*r;
+
+    printf("For a circle with radius %lf\n", r);
+    printf("the circumference is %lf\n", circ);
+    printg("and the area is %lf\n", area);    
+}
+
+*/
